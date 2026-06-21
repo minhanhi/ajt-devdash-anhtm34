@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevDash - Product Catalog Dashboard</title>
+  <meta name="description" content="A clean, responsive single-page developer dashboard for browsing products and categories.">
+  <!-- Load Outfit font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header with dashboard title and filters -->
+    <header class="dashboard-header">
+      <div class="header-container">
+        <div class="logo-area">
+          <span class="logo-icon">⚡</span>
+          <h1 id="app-title">DevDash</h1>
+        </div>
+        
+        <div class="filters-container">
+          <div class="input-group search-group">
+            <span class="input-icon">🔍</span>
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Search products by title..." 
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="input-group">
+            <span class="input-icon">📂</span>
+            <select id="category-select">
+              <option value="">All Categories</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <span class="input-icon">↕️</span>
+            <select id="sort-select">
+              <option value="">Sort By</option>
+              <option value="title-asc">Title: A-Z</option>
+              <option value="title-desc">Title: Z-A</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-content">
+      <div class="content-container">
+        <!-- Status Bar showing item counts / reset -->
+        <div class="status-bar">
+          <span id="results-count" class="results-text">Loading items...</span>
+          <button id="reset-filters-btn" class="btn btn-secondary hidden">Clear Filters</button>
+        </div>
+
+        <!-- Dynamic Views (Loading / Success / Error) -->
+        <section id="main-view">
+          <!-- Loading View -->
+          <div id="loading-state" class="state-view">
+            <div class="loader-spinner"></div>
+            <p class="state-message">Fetching dashboard resources from DummyJSON...</p>
+          </div>
+
+          <!-- Error View -->
+          <div id="error-state" class="state-view hidden">
+            <div class="error-icon">❌</div>
+            <p id="error-message" class="state-message">Failed to load data. Please check your connection.</p>
+            <button id="retry-btn" class="btn btn-primary">Try Again</button>
+          </div>
+
+          <!-- Success View (Products Grid) -->
+          <div id="products-grid" class="products-grid hidden"></div>
+          
+          <!-- Empty View -->
+          <div id="empty-state" class="state-view hidden">
+            <div class="empty-icon">📭</div>
+            <p class="state-message">No products matches your filters.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+      <p>&copy; 2026 DevDash. Premium Developer Workspace Dashboard.</p>
+    </footer>
+
+    <!-- Detail View Modal -->
+    <div id="detail-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-product-title">
+      <div class="modal-card">
+        <button id="modal-close-btn" class="modal-close" aria-label="Close details">&times;</button>
+        
+        <div class="modal-body" id="modal-content">
+          <!-- Dynamically populated product details -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
